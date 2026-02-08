@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Chandini 🌙</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      color: white;
+      z-index: 10;
+      background: rgba(0, 0, 0, 0.65);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(255, 105, 180, 0.6);
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 34px;
+      text-shadow: 2px 2px 15px #ff69b4;
+    }
+
+    button {
+      font-size: 20px;
+      font-weight: bold;
+      padding: 15px 40px;
+      margin: 10px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    #yes {
+      background: linear-gradient(45deg, #22c55e, #16a34a);
+      color: white;
+    }
+
+    #no {
+      background: linear-gradient(45deg, #ef4444, #dc2626);
+      color: white;
+      position: absolute;
+    }
+
+    .floating-item {
+      position: absolute;
+      user-select: none;
+      pointer-events: none;
+      animation: floatUp 8s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) scale(0.5) rotate(0deg); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-20vh) scale(1.6) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(0.9); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Chandini 🌙 Will you be My Valentine? 😌</h1>
+    <button id="yes">YES</button>
+    <button id="no">NO</button>
+  </div>
+
+<script>
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+
+  // ONLY hearts + moons
+  const items = ["❤️","💖","💕","💘","🌙","🌛","🌜","🌝"];
+
+  function createFloatingItem() {
+    const item = document.createElement("div");
+    item.classList.add("floating-item");
+
+    const random = items[Math.floor(Math.random() * items.length)];
+    item.innerHTML = random;
+
+    // moons bigger than hearts
+    if(random.includes("🌙") || random.includes("🌛") || random.includes("🌜") || random.includes("🌝")){
+      item.style.fontSize = Math.random() * 40 + 40 + "px";
+    } else {
+      item.style.fontSize = Math.random() * 25 + 25 + "px";
+    }
+
+    item.style.left = Math.random() * 100 + "vw";
+    item.style.animationDuration = Math.random() * 4 + 5 + "s";
+
+    document.body.appendChild(item);
+    setTimeout(() => { item.remove(); }, 9000);
+  }
+
+  setInterval(createFloatingItem, 180);
+
+  // running NO button
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 150);
+    const y = Math.random() * (window.innerHeight - 80);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
+
+  // YES click
+  yesBtn.addEventListener("click", () => {
+    document.body.innerHTML = `
+      <div style="
+        height:100vh; width:100vw;
+        display:flex; flex-direction:column;
+        align-items:center; justify-content:center;
+        background:black; color:white; text-align:center;
+      ">
+        <div style="font-size:140px; animation:pulse 1.5s infinite;">💖</div>
+
+        <div style="font-size:36px; font-weight:bold;">
+          Thanks Chandini 🌙😄<br>
+          Your Eyes felt like a warm hug to my heart. Thank you for being my Valentine 💘<br>
+        </div>
+
+        <p style="margin-top:20px; font-size:20px; color:#ff69b4;">
+          See you soon ❤️
+        </p>
+      </div>
+    `;
+  });
+</script>
+
+</body>
+</html>
